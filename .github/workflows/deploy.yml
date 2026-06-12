@@ -19,7 +19,7 @@ jobs:
           cat index.html
 
       - name: Deploy to Server
-        uses: appleboy/scp-action@v0.1.7
+        uses: ubuntu/scp-action@v0.1.7
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ubuntu
