@@ -27,11 +27,4 @@ jobs:
           source: "index.html"
           target: "/var/www/html/"
 
-      - name: Move File
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ubuntu
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            sudo cp /home/ubuntu/index.html /var/www/html/
+    
