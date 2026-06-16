@@ -6,14 +6,24 @@ on:
       - master
 
 jobs:
-  build-and-deploy:
+  build-test-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
 
-      - name: Verify HTML File
+      - name: Verify HTML File Exists
+        run: |
+          test -f index.html
+
+      - name: Validate HTML
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tidy
+          tidy -errors -q index.html
+
+      - name: Display HTML Content
         run: |
           ls -la
           cat index.html
@@ -26,5 +36,3 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "index.html"
           target: "/var/www/html/"
-
-    
